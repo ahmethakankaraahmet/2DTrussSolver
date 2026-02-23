@@ -10,16 +10,12 @@ This package includes two Python scripts for Finite Element Method (FEM) analysi
 - Python 3.x
 - NumPy library
 
-### Installation
-```bash
-pip install numpy
-```
 
 ## How to Use
 
-### Option 1: Interactive Version (Recommended for Beginners)
+### Option 1: Interactive Version
 Run the interactive script:
-```bash
+```
 python truss_solver_interactive.py
 ```
 
@@ -34,42 +30,14 @@ The program will:
 3. Solve and display results
 4. Optionally save results to JSON file
 
-**Example Session:**
-```
-Choose an option:
-1. Use example problem (5 nodes, 7 elements)
-2. Enter custom problem
-3. Exit
-
-Your choice (1/2/3): 2
-
---- MATERIAL PROPERTIES ---
-Enter Young's Modulus (MPa) [default: 200000]: 200000
-Enter Cross-sectional Area (mm²) [default: 500]: 500
-
---- NODE COORDINATES ---
-Node 0 (or 'done'): 0,0
-Node 1 (or 'done'): 0,2
-Node 2 (or 'done'): 2,0
-Node 3 (or 'done'): done
-
---- ELEMENT CONNECTIVITY ---
-Element 0 (or 'done'): 0,1
-Element 1 (or 'done'): 1,2
-Element 2 (or 'done'): done
-
-... (continues with boundary conditions and forces)
-```
 
 ### Option 2: Direct Code Editing
 Simply run the script:
-```bash
+```
 python truss_solver.py
 ```
 
 ### 2. Editing Input Parameters
-
-Open `truss_solver.py` in any text editor and modify the values in the `if __name__ == "__main__":` section:
 
 #### Material Properties
 ```python
@@ -126,43 +94,6 @@ The script prints:
 - **Reaction Forces**: Forces at supports (N)
 - **Internal Forces**: Axial forces in each element with TENSION/COMPRESSION indication (N)
 
-### 4. Advanced Usage
-
-#### Using as a Module
-Import the function in your own script:
-```python
-from truss_solver import solve_truss
-import numpy as np
-
-# Define your inputs
-E = 200e3
-A = 500
-nodes = np.array([[0,0], [1,0], [1,1]])
-elements = np.array([[0,1], [1,2]])
-bc = np.array([[0,1,1]])
-forces = np.array([[0,0], [0,-1000], [0,0]])
-
-# Solve
-results = solve_truss(E, A, nodes, elements, bc, forces)
-
-# Access results
-displacements = results['displacements']
-internal_forces = results['internal_forces']
-```
-
-#### Saving Results to JSON
-Uncomment the code at the end of the script to save results to a JSON file:
-```python
-with open('truss_results.json', 'w') as f:
-    json.dump(results_serializable, f, indent=2)
-```
-
-## Example Problem
-
-The default example in the script is a 5-node, 7-element truss with:
-- Pinned support at node 2
-- Roller support at node 5
-- 100 kN downward forces at nodes 1 and 3
 
 ## Modifying the Code
 
@@ -180,21 +111,5 @@ Edit the calculation sections:
 - Line 75-77: Displacement solver
 - Line 83-102: Internal force calculation
 
-## Troubleshooting
-
-**Error: "module 'numpy' has no attribute..."**
-- Make sure NumPy is installed: `pip install numpy`
-
-**Error: "Singular matrix"**
-- Check that your structure has sufficient supports
-- Ensure boundary conditions are properly defined
-- Verify element connectivity
-
-**Unexpected results:**
-- Verify node indexing (0-indexed in code)
-- Check force directions (positive = right/up, negative = left/down)
-- Confirm boundary conditions (1 = fixed, 0 = free)
-- Ensure consistent units (mm, N, MPa)
-
-## Contact & Support
-For questions or issues, refer to your course materials or consult with your instructor.
+### Author
+Ahmet Hakan KARAAHMET
